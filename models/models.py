@@ -10,9 +10,9 @@ class plantillas_wni_invoice(models.Model):
     def _get_serie(self):
         cr = self.env.cr
         if self.origin:
-            sql = "select splot.name from stock_picking pi left join stock_move sp on sp.picking_id =pi.id  left join stock_move_line spl on spl.move_id=sp.id left join stock_production_lot splot on splot.id=spl.lot_id where  pi.origin='"+str(self.origin)+"' AND sp.product_id="+str(self.product_id.id)+" AND splot.name != 'None'"
+            sql = "select splot.name from stock_picking pi left join stock_move sp on sp.picking_id=pi.id left join stock_move_line spl on spl.move_id=sp.id left join stock_production_lot splot on splot.id=spl.lot_id where  pi.origin='"+str(self.origin)+"' AND sp.product_id="+str(self.product_id.id)+" AND splot.name != 'None'"
         else:
-            sql = "select splot.name from stock_picking pi left join stock_move sp on sp.picking_id =pi.id	left join stock_move_line spl on spl.move_id=sp.id left join stock_production_lot splot on splot.id=spl.lot_id where  pi.origin='"+str(self.invoice_id.origin)+"' AND sp.product_id="+str(self.product_id.id)+" AND splot.name != 'None'"
+            sql = "select splot.name from stock_picking pi left join stock_move sp on sp.picking_id=pi.id left join stock_move_line spl on spl.move_id=sp.id left join stock_production_lot splot on splot.id=spl.lot_id where  pi.origin='"+str(self.invoice_id.origin)+"' AND sp.product_id="+str(self.product_id.id)+" AND splot.name != 'None'"
         cr.execute(sql)
         nseries = cr.fetchall()
         serie_text = ''
